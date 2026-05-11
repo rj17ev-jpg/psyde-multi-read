@@ -40,9 +40,14 @@ uploaded = st.file_uploader(
     accept_multiple_files=True,
 )
 
-if not uploaded:
-    st.info("👆 Upload one or more CSV files to get started.")
-    st.stop()
+SAMPLE_PATH = "data/association_clean.csv"  # or association_sample.csv
+df_loaded = pd.read_csv(SAMPLE_PATH)
+
+# if not uploaded:
+#     st.info("📂 Showing association task data. Upload your own CSV to analyse it.")
+    
+# else:
+#     df_loaded = pd.concat([pd.read_csv(f) for f in uploaded], ignore_index=True)
 
 REQUIRED = {"subject", "day", "trainingtype", "accuracy", "rt"}
 
