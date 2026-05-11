@@ -69,7 +69,12 @@ def load_files(files):
     combined["day"]      = combined["day"].astype(int)
     return combined
 
-raw = load_files(uploaded)
+raw = df_loaded.copy()
+raw.columns = raw.columns.str.strip().str.lower()
+raw["rt"]       = pd.to_numeric(raw["rt"],       errors="coerce")
+raw["accuracy"] = pd.to_numeric(raw["accuracy"], errors="coerce")
+raw["day"]      = raw["day"].astype(int)
+raw.dropna(subset=["accuracy", "rt"], inplace=True)
 if raw is None:
     st.stop()
 
