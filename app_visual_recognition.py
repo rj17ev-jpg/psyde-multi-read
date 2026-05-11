@@ -8,12 +8,12 @@ from scipy import stats as scipy_stats
 
 # ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Lab Training Dashboard",
+    page_title="Visual Recognition Task",
     page_icon="🧠",
     layout="wide",
 )
 
-st.title("🧠 Visual Recognition Training Dashboard")
+st.title("🧠 Visual Recognition Task")
 st.markdown("Upload a CSV with columns: `subject`, `day`, `trainingtype`, `accuracy`, `RT`")
 
 # ── Color palette ─────────────────────────────────────────────────────────────
@@ -40,9 +40,14 @@ uploaded = st.file_uploader(
     help="Columns required: subject, day, trainingtype, accuracy, RT"
 )
 
-if not uploaded:
-    st.info("👆 Upload one or more CSV files to get started.")
-    st.stop()
+SAMPLE_PATH = "data/visual_recognition_clean.csv"  
+df_loaded = pd.read_csv(SAMPLE_PATH)
+
+# if not uploaded:
+#     st.info("📂 Showing sample data. Upload your own CSV to analyse it.")
+    
+# else:
+#     df_loaded = pd.concat([pd.read_csv(f) for f in uploaded], ignore_index=True)
 
 # ── Load & validate ───────────────────────────────────────────────────────────
 REQUIRED = {"subject", "day", "trainingtype", "accuracy", "rt"}
